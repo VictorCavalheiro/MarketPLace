@@ -1,0 +1,24 @@
+.desc{
+	display: none;
+}
+
+
+.selected{
+    border-left-width: 1.5px;
+    border-left-style: solid;
+    border-left-color: #4b8cf2;
+}
+.hr_home{
+      display: block; 
+  content: ""; 
+  height: 30px; 
+  margin-top: -31px; 
+  border-style: solid; 
+  border-color: #8c8b8b; 
+  border-width: 0 0 1px 0; 
+  border-radius: 20px; 
+}
+
+.ads{
+    color: black;
+}
