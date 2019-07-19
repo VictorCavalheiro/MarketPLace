@@ -8,6 +8,8 @@ var passport      = require("passport"),
 var User          = require("./models/user");
 
 var app           =    express();
+
+var flash         =  require("connect-flash");
 //setting the app
 app.use(bodyParser.urlencoded({extended : true}));
 
@@ -41,10 +43,14 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//ADD FLASH 
+app.use(flash());
 
 //putting a  correntUser variable in all views 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
+     res.locals.error= req.flash("error")
+    res.locals.success= req.flash("success")
     next();
 });
 
@@ -78,9 +84,11 @@ app.post("/register", function(req, res){
     User.register(newUser,req.body.password,function(erro, user){
         if(erro){
             console.log(erro);
-            res.render("register");
+            req.flash("error", "Existing use, please change!");
+            res.redirect("/register");
         }else{
-            res.render("login");
+             req.flash("success", "Your registration was successful!");
+            res.redirect("/login");
         }
     });
 });
@@ -101,5 +109,6 @@ app.get("/login", function(req, res){
 //logout logic
 app.get("/logout", function(req, res) {
     req.logout();
+    req.flash("success", "Logged you out!");
     res.redirect("/login");
 });
