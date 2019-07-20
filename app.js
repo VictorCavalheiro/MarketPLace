@@ -2,8 +2,8 @@ var express       = require("express");
 var bodyParser    = require("body-parser");
 var mongoose      = require("mongoose");
 //login autentication frameworks
-var passport      = require("passport"),
-    LocalStrategy = require("passport-local");
+var passport      = require("passport");
+var LocalStrategy = require("passport-local");
 //getting the BD models
 var User          = require("./models/user");
 
