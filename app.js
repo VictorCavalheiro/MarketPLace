@@ -10,6 +10,10 @@ var User          = require("./models/user");
 var app           =    express();
 
 var flash         =  require("connect-flash");
+
+//import the arq with all  middleware
+var middleware = require("./middleware/index.js");
+
 //setting the app
 app.use(bodyParser.urlencoded({extended : true}));
 
@@ -23,14 +27,14 @@ mongoose.connect("mongodb://localhost:27017/E-commerce", { useNewUrlParser: true
 
 
 // set this method to run locally , by:teka
-app.listen(3001, 'localhost', function() {
+/*app.listen(3001, 'localhost', function() {
     console.log("Running in localhost:3001");
-});
+});*/
 
 // set this method to run in AWS env 
-/*app.listen(process.env.PORT,process.env.IP,function(){
+app.listen(process.env.PORT,process.env.IP,function(){
     console.log("E-commerce v1 running AWS");
-});*/
+});
 
 // Setting Passport - begin
 
@@ -78,6 +82,10 @@ app.get("/",function(req, res){
         res.render("home",{ads : ads});
 });
 
+/*=================================
+        Register Router - Inicio
+  ==================================      
+*/
 // show register form
 app.get("/register", function(req, res){
         res.render("register");
@@ -98,7 +106,15 @@ app.post("/register", function(req, res){
         }
     });
 });
+/*=================================
+        Register Router - Fim
+  ==================================      
+*/
 
+/*=================================
+        Login Router - Inicio
+  ==================================      
+*/
 //LOGIN LOGIC
 app.post("/login", passport.authenticate("local", 
     {
@@ -117,4 +133,23 @@ app.get("/logout", function(req, res) {
     req.logout();
     req.flash("success", "Logged you out!");
     res.redirect("/login");
+});
+
+
+app.get("/logout", function(req, res) {
+    req.logout();
+    req.flash("success", "Logged you out!");
+    res.redirect("/login");
+});
+
+/*=================================
+        Login Router - Fim
+  ==================================      
+*/
+
+
+
+app.get("/home/new",middleware.isLoggedIn,function(req, res) {
+       res.render("ads/new");
+       
 });

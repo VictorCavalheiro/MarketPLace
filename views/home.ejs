@@ -2,12 +2,24 @@
 <head>
   <link  rel="stylesheet" href="/stylesheets/home.css">
 </head>
-
-<div class="container">      
-  <div class="jumbotron text-center">
-      <h1>The Best!</h1>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-  </div>
+  
+  
+  <header class="jumbotron text-center">
+      <div class="container">
+          <% if(!currentUser){ %>
+              <h1>The best!</h1>
+           <% } else{ %>
+                <h2><%= currentUser.username %></h2>
+               
+            <% } %>
+         <% if(currentUser){ %>   
+            <p>
+              <a class="btn btn-primary btn-lg" href="/home/new">Add a new Ad!</a> 
+            </p>
+          <% } %>
+      </div>
+  </header>
+  
   <div class="row" style="display:flex; flex-wrap:wrap;">
             <% ads.forEach(function(ad,index){%>
               <a class="ads" href="/">
