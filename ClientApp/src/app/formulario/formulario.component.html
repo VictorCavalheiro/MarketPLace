@@ -15,21 +15,23 @@
 	<div class="form-group input-group">
 		<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-		 </div>
-        <input name="" class="form-control" placeholder="Full name" type="text" name="Nome" [(ngModel)]="user.name" required>
-    </div> <!-- form-group// -->
+		</div>
+		<input [class.is-valid]="nome.valid && nome.touched" [class.is-invalid]="!nome.valid && nome.touched" class="form-control" placeholder="Full name" type="text" name="Nome" [(ngModel)]="user.name" required #nome="ngModel">
+		
+	</div>
+	 <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 		 </div>
-        <input name="" class="form-control" placeholder="Email address" type="email" name="Email" ngModel>
+        <input [class.is-valid]="email.valid && email.touched" [class.is-invalid]="!email.valid && email.touched"  class="form-control" placeholder="Email address" type="email" name="Email" [(ngModel)]="user.email" required email #email=ngModel>
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
     </div>
     
-		<select ngModel name="Telefone" class="custom-select" style="max-width: 120px;">
+		<select name="Telefone" class="custom-select" style="max-width: 120px;">
 		    <option selected="">+971</option>
 		    <option value="1">+972</option>
 		    <option value="2">+198</option>
@@ -42,7 +44,7 @@
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
 		</div>
-		<select class="form-control" name="Trabalho" ngModel>
+		<select class="form-control" name="Trabalho">
 			<option selected=""> Select job type</option>
 			<option>Designer</option>
 			<option>Manager</option>

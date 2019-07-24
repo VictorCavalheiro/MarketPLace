@@ -9,13 +9,13 @@ import * as $ from 'jquery';
 export class FormularioComponent implements OnInit {
 
   user: any = {
-    name:'victor',
-    email:'victor.cavalheiro17@gmail.com',
-    region:'+701',
-    phoneNumber:'91234206',
-    work:'dev',
-    password:'1234',
-    repeatPassword:'1234'
+    name: null,
+    email:null,
+    region: null,
+    phoneNumber:null,
+    work:null,
+    password:null,
+    repeatPassword:null
   }
 
   onSubmit(form){
