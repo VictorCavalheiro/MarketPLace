@@ -5,7 +5,9 @@ var mongoose      = require("mongoose");
 var passport      = require("passport");
 var LocalStrategy = require("passport-local");
 //getting the BD models
-var User          = require("./models/user");
+var User          = require("./models/user"),
+     Ad            = require("./models/ad");
+
 
 var app           =    express();
 
@@ -152,4 +154,28 @@ app.get("/logout", function(req, res) {
 app.get("/home/new",middleware.isLoggedIn,function(req, res) {
        res.render("ads/new");
        
+});
+
+app.post("/home/new",middleware.isLoggedIn, function(req, res){
+     var author = {
+        id: req.user._id,
+        username: req.user.username
+     }
+     
+     var newAd = {
+            name: req.body.name,
+            price: req.body.price,
+            image: req.body.image,
+            description: req.body.description,
+            author:author
+        };
+        //insert a new Ad, if it works redirect the page
+     Ad.create(newAd, function(erro, newlyCreated){
+                if(erro){
+                    console.log(erro);
+                }else{
+                     res.redirect("/");
+                }
+     });
+   
 });

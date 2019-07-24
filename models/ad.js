@@ -4,7 +4,7 @@ var mongoose = require("mongoose");
 //setando a new db schema 
 var adSchema = new mongoose.Schema({
     
-    name : String,
+    title : String,
     image :String,
     description : String,
     price : Number,
