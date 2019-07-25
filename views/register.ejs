@@ -1,23 +1,27 @@
 <% include partials/header %>
 <head>
+    
+    <script src="./../node_modules/jquery/dist/jquery.js"></script>
+    <script src="./../node_modules/parsleyjs/dist/parsley.js"></script>
     <link  rel="stylesheet" href="/stylesheets/register.css">
-     <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap" rel="stylesheet">
 </head>
+
 <div class="container">
     <div class="row">
         <div class="col-md-3 col-sm-12"></div>
         <div class="col-md-6 col-sm-12" id="box">
             <h1 id="title">Register</h1>
-            <form class="ui form" action="/register" method="POST">
+            <form  class="ui form" action="/register" method="POST" id="form">
               <h4 class="ui dividing header" id="header">User Information</h4>
               <div class="field">
-                <label>Name</label>
+                <label for="firstName">Name</label>
                 <div class="two fields">
                   <div class="field">
-                    <input type="text" name="firstName" placeholder="First Name">
+                    <input type="text" class="form-control" name="firstName" required placeholder="First Name">
                   </div>
                   <div class="field">
-                    <input type="text" name="LastName" placeholder="Last Name">
+                    <input type="text" name="LastName" placeholder="Last Name" required>
                   </div>
                 </div>
               </div>
@@ -42,12 +46,13 @@
               <div class="two fields">
                 <div class="field">
                     <label>Password</label>
-                    <input type="password" name="password" placeholder="Password">
+                    <input id="password" type="password" name="password" placeholder="Password" minlength="6" >
                 </div>
                 <div class="field">
                     <label> Confirm Password</label>
-                    <input type="password" name="confirmPassword" placeholder="Confirm Password">
+                    <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm Password">
                 </div>
+                
               </div>
                <div class=" field">
                 <div class="checkbox">
@@ -57,10 +62,27 @@
                   </label>
                 </div>
               </div>
-              <button class="btn btn-primary btn-lg btn-block">Register</button>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
             </form>
         </div>
         <div class="col-md-3 col-sm-12"></div>
     </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+  
+    $('#password').on('change input keyup', function() {
+      if (this.value) {
+        $('#confirmPassword').prop('required', true).parsley().validate();
+      } else {
+        $('#confirmPassword').prop('required', false).parsley().validate();
+      }
+    });
+  });
+$('#form').parsley();
+   
+    
+
+</script>
 <% include partials/footer %>

@@ -29,14 +29,14 @@ mongoose.connect("mongodb://localhost:27017/E-commerce", { useNewUrlParser: true
 
 
 // set this method to run locally , by:teka
-/*app.listen(3001, 'localhost', function() {
+app.listen(3001, 'localhost', function() {
     console.log("Running in localhost:3001");
-});*/
+});
 
 // set this method to run in AWS env 
-app.listen(process.env.PORT,process.env.IP,function(){
+/*app.listen(process.env.PORT,process.env.IP,function(){
     console.log("E-commerce v1 running AWS");
-});
+});*/
 
 // Setting Passport - begin
 
