@@ -29,14 +29,14 @@ mongoose.connect("mongodb://localhost:27017/E-commerce", { useNewUrlParser: true
 
 
 // set this method to run locally , by:teka
-app.listen(3001, 'localhost', function() {
+/*app.listen(3001, 'localhost', function() {
     console.log("Running in localhost:3001");
-});
+});*/
 
 // set this method to run in AWS env 
-/*app.listen(process.env.PORT,process.env.IP,function(){
+app.listen(process.env.PORT,process.env.IP,function(){
     console.log("E-commerce v1 running AWS");
-});*/
+});
 
 // Setting Passport - begin
 
@@ -81,7 +81,15 @@ var ads =[
 
 //show home page       
 app.get("/",function(req, res){
-        res.render("home",{ads : ads});
+    Ad.find({},function(erro, allAds){
+               if(erro){
+                   console.log(erro);
+               }else{
+                   console.log(allAds)
+                    res.render("home",{ads :allAds});
+               }
+               
+           });
 });
 
 /*=================================
@@ -149,7 +157,10 @@ app.get("/logout", function(req, res) {
   ==================================      
 */
 
-
+/*=================================
+       Ad Router - Inicio
+  ==================================      
+*/
 
 app.get("/home/new",middleware.isLoggedIn,function(req, res) {
        res.render("ads/new");
@@ -163,7 +174,7 @@ app.post("/home/new",middleware.isLoggedIn, function(req, res){
      }
      
      var newAd = {
-            name: req.body.name,
+            title: req.body.title,
             price: req.body.price,
             image: req.body.image,
             description: req.body.description,
@@ -179,3 +190,7 @@ app.post("/home/new",middleware.isLoggedIn, function(req, res){
      });
    
 });
+/*=================================
+        Ad Router - Inicio
+  ==================================      
+*/

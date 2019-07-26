@@ -23,14 +23,14 @@
     <div class="row" style="display:flex; flex-wrap:wrap;">
               <% ads.forEach(function(ad,index){%>
                 <a class="ads" href="/">
-                  <div class="col-md-2 col-sm-6">
+                  <div class="col-md-3 col-sm-6">
                       <div class="thumbnail card " id ="card<%=index %>">
                         <img src="<%= ad.image %>" >
                           <div class="caption " >
                               <hr class="hr_home">
-                              <h4><%= ad.name %></h4>
+                              <h3 class="title"><%= ad.title %></h3>
                               <div class = "desc">
-                                  <h4>US$ <%= ad.price %></h4>
+                                  <h4 class="price">US$ <%= ad.price %></h4>
                                   <p><%=ad.description%></p>
                                   <p><a></a></p>
                               </div>

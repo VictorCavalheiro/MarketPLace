@@ -9,16 +9,21 @@
     border-left-color: #4b8cf2;
 }
 .hr_home{
-      display: block; 
-  content: ""; 
-  height: 30px; 
-  margin-top: -31px; 
-  border-style: solid; 
-  border-color: #8c8b8b; 
-  border-width: 0 0 1px 0; 
-  border-radius: 20px; 
+   border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 .ads{
     color: black;
+}
+
+.title{
+    text-align:  center ;
+    color:#4b8cf2;
+}
+
+.price{
+    color: #34d147 !important;
+    margin-top: 10% !important;
 }
