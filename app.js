@@ -68,16 +68,6 @@ app.use(function(req, res, next){
 
 // Setting Passport - end
 
-var ads =[
-            {name: "Playstation 4 ", image:"https://images-americanas.b2w.io/produtos/01/00/item/133092/7/133092720_1GG.jpg",price : "2400",description:"blah blah blah"},
-            {name: "Xbox one 1TB", image:"https://a-static.mlcdn.com.br/618x463/console-xbox-one-s-1tb-com-2-controles-microsoft/mixabc/55/cae62e8b52dd880493955d5bd8d6e246.jpg",price : "1800",description:"blah blah blah"},
-            {name: "Xbox one 1TB", image:"https://a-static.mlcdn.com.br/618x463/console-xbox-one-s-1tb-com-2-controles-microsoft/mixabc/55/cae62e8b52dd880493955d5bd8d6e246.jpg",price : "1800",description:"blah blah blah"},
-            {name: "Game boy SP", image:"https://img.bgxcdn.com/images/oaupload/banggood/images/DD/EB/0b01dc79-7722-47b9-b8bb-42b33475dca6.jpg",price : "500",description:"blah blah blah"},
-            {name: "Playstation 4 ", image:"https://images-americanas.b2w.io/produtos/01/00/item/133092/7/133092720_1GG.jpg",price : "2400",description:"blah blah blah"},
-            {name: "Xbox one 1TB", image:"https://a-static.mlcdn.com.br/618x463/console-xbox-one-s-1tb-com-2-controles-microsoft/mixabc/55/cae62e8b52dd880493955d5bd8d6e246.jpg",price : "1800",description:"blah blah blah"},
-            {name: "Xbox one 1TB", image:"https://a-static.mlcdn.com.br/618x463/console-xbox-one-s-1tb-com-2-controles-microsoft/mixabc/55/cae62e8b52dd880493955d5bd8d6e246.jpg",price : "1800",description:"blah blah blah"},
-            {name: "Game boy SP", image:"https://img.bgxcdn.com/images/oaupload/banggood/images/DD/EB/0b01dc79-7722-47b9-b8bb-42b33475dca6.jpg",price : "500",description:"blah blah blah"}
-          ]
 
 //show home page       
 app.get("/",function(req, res){
