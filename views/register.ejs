@@ -1,18 +1,25 @@
 <% include partials/header %>
 <head>
-    
-    <script src="./../node_modules/jquery/dist/jquery.js"></script>
-    <script src="./../node_modules/parsleyjs/dist/parsley.js"></script>
     <link  rel="stylesheet" href="/stylesheets/register.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap" rel="stylesheet">
 </head>
+
+<div class="bs-callout bs-callout-warning hidden">
+  <h4>Oh snap!</h4>
+  <p>This form seems to be invalid :(</p>
+</div>
+
+<div class="bs-callout bs-callout-info hidden">
+  <h4>Yay!</h4>
+  <p>Everything seems to be ok :)</p>
+</div>
 
 <div class="container">
     <div class="row">
         <div class="col-md-3 col-sm-12"></div>
         <div class="col-md-6 col-sm-12" id="box">
             <h1 id="title">Register</h1>
-            <form  class="ui form" action="/register" method="POST" id="form">
+            <form  class="ui form" action="/register" method="POST" id="form" data-parsley-validate="">
               <h4 class="ui dividing header" id="header">User Information</h4>
               <div class="field">
                 <label for="firstName">Name</label>
@@ -29,10 +36,10 @@
                 <label>Address</label>
                 <div class="fields">
                   <div class="twelve wide field">
-                    <input type="text" name="address" placeholder="Street Address">
+                    <input id="address" type="text" name="address" placeholder="Street Address" data-parsley-required="true">
                   </div>
                   <div class="four wide field">
-                    <input type="text" name="address2" placeholder="Apt #">
+                    <input type="text" name="address2" placeholder="Apt #" data-parsley-required="true">
                   </div>
                 </div>
               </div>
@@ -41,27 +48,28 @@
               <h4 class="ui dividing header">Credential</h4>
               <div class="field">
                 <label>Username</label>
-                <input type="text" name="userName" placeholder="Username">
+                <input type="text" name="userName" placeholder="Username" data-parsley-required="true" data-parsley-pattern="^[a-z][a-z0-9]+$">
               </div>
               <div class="two fields">
                 <div class="field">
                     <label>Password</label>
-                    <input id="password" type="password" name="password" placeholder="Password" minlength="6" >
+                    <input id="password" type="password" name="password" placeholder="Password" equalto="#confirmPassword" data-parsley-required="true">
                 </div>
                 <div class="field">
                     <label> Confirm Password</label>
-                    <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm Password">
+                    <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm Password" equalto="#password" data-parsley-required="true" data-parsley-equalto="#password">
                 </div>
-                
+
               </div>
                <div class=" field">
                 <div class="checkbox">
-                <label>
-                  <input type="checkbox" name = "accept">
+                <label for="check">
+                  <input id="hobby1" name=check[] type="checkbox" data-parsley-required >
                     I accept the <a href="/"> Terms of Use</a> & <a href="/"> Privacy Policy </a>
                   </label>
                 </div>
               </div>
+
               <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
             </form>
         </div>
@@ -69,20 +77,41 @@
     </div>
 </div>
 
-<script>
-  $(document).ready(function() {
-  
-    $('#password').on('change input keyup', function() {
-      if (this.value) {
-        $('#confirmPassword').prop('required', true).parsley().validate();
-      } else {
-        $('#confirmPassword').prop('required', false).parsley().validate();
-      }
-    });
+
+
+
+<script type="text/javascript">
+
+function inicia() {
+
+  var options = {
+  types: ['(cities)'],
+  componentRestrictions: {country: "us"}
+  };
+
+  var input = document.getElementById('address');
+  var autocomplete = new google.maps.places.Autocomplete(input, options);
+  autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']); 
+}
+
+
+
+  $('#form').parsley().on('field:validated', function() {
+    var ok = $('.parsley-error').length === 0;
+  })
+  .on('form:submit', function() {
+    if(ok)
+      return true;
+    else
+      return false;
   });
-$('#form').parsley();
-   
-    
+  
 
 </script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1yfRJ7h3IrtwBqsycAKmczErBNZ9A0jQ&libraries=places"></script>
+
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1yfRJ7h3IrtwBqsycAKmczErBNZ9A0jQ&libraries=places"></script> -->
+
 <% include partials/footer %>

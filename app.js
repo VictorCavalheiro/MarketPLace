@@ -22,6 +22,12 @@ app.use(bodyParser.urlencoded({extended : true}));
 //setting the files that are in the public folder on express 
 app.use(express.static(__dirname+"/public"));
 
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/js/'));
+
+app.use('/scripts', express.static(__dirname + '/node_modules/jquery/dist/'));
+
+app.use('/parsley', express.static(__dirname + '/node_modules/parsleyjs/dist/'));
+
 app.set("view engine", "ejs");
 
 //setting database connections 
@@ -29,14 +35,14 @@ mongoose.connect("mongodb://localhost:27017/E-commerce", { useNewUrlParser: true
 
 
 // set this method to run locally , by:teka
-/*app.listen(3001, 'localhost', function() {
+app.listen(3001, 'localhost', function() {
     console.log("Running in localhost:3001");
-});*/
-
+});
+/*
 // set this method to run in AWS env 
 app.listen(process.env.PORT,process.env.IP,function(){
     console.log("E-commerce v1 running AWS");
-});
+});*/
 
 // Setting Passport - begin
 
@@ -127,6 +133,7 @@ app.post("/login", passport.authenticate("local",
 app.get("/login", function(req, res){
         res.render("login");
 });
+
 
 //logout logic
 app.get("/logout", function(req, res) {
